@@ -3,6 +3,7 @@ My personal collections of Skills
 
 ## Personal
 • ios-review-and-quality-improvements
+• plan-prompt-grill
 
 ## Third Party
 
