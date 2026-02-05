@@ -1,5 +1,5 @@
 ---
-name: ios-review-and-quality-imrpvements
+name: ios-review-and-quality-improvements
 description: Staff-level iOS code review and quality improvements for Swift, SwiftUI, Core Data, and Swift Concurrency changes. Use when asked to review code changes in a branch, analyze framework-specific updates, and propose a plan to finalize changes, reduce tech debt, and improve code quality.
 ---
 # iOS Code Review and Quality Improvements
