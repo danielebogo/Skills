@@ -2,8 +2,8 @@
 My personal collections of Skills
 
 ## Personal
-- ios-review-and-quality-improvements
-- plan-prompt-grill
+- ios-review-and-quality-improvements ([@twannl](https://x.com/twannl/status/2019016628676030935?s=20))
+- plan-prompt-grill ([@LLMJunky](https://x.com/LLMJunky/status/2019079131284066656?s=20))
 
 ## Third Party
 
