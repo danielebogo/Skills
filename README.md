@@ -17,6 +17,7 @@ My personal collections of Skills
 - [swiftui-expert-skill](https://github.com/AvdLee/SwiftUI-Agent-Skill)
 - [swift-concurrency](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill)
 - [core-data-expert](https://github.com/AvdLee/Core-Data-Agent-Skill)
+- [swift-testing-expert](https://github.com/AvdLee/Swift-Testing-Agent-Skill)
 
 ### Jamesrochabrun
 - [swiftui-animation](https://github.com/jamesrochabrun/skills/tree/main/skills/swiftui-animation)
