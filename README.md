@@ -13,14 +13,31 @@ My personal collections of Skills
 ### Dimillian
 - [Skills](https://github.com/dimillian/skills)
   - app-store-changelog
-  - swift-concurrency-expert
+  ```bash
+  npx skills add https://github.com/dimillian/skills --skill app-store-changelog
+  ```
   - swiftui-liquid-glass
+  ```bash
+  npx skills add https://github.com/dimillian/skills --skill swiftui-liquid-glass
+  ```
 
 ### AvdLee
 - [swiftui-expert-skill](https://github.com/AvdLee/SwiftUI-Agent-Skill)
+```bash
+npx skills add https://github.com/avdlee/swiftui-agent-skill --skill swiftui-expert-skill
+```
 - [swift-concurrency](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill)
+```bash
+npx skills add https://github.com/avdlee/swift-concurrency-agent-skill --skill swift-concurrency
+```
 - [core-data-expert](https://github.com/AvdLee/Core-Data-Agent-Skill)
+```bash
+npx skills add https://github.com/avdlee/core-data-agent-skill --skill core-data-expert
+```
 - [swift-testing-expert](https://github.com/AvdLee/Swift-Testing-Agent-Skill)
+```bash
+npx skills add https://github.com/avdlee/swift-testing-agent-skill --skill swift-testing-expert
+```
 
 ### Jamesrochabrun
 - [swiftui-animation](https://github.com/jamesrochabrun/skills/tree/main/skills/swiftui-animation)
