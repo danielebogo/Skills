@@ -12,247 +12,144 @@
 
 ---
 
-# Workflow Orchestration
+## Feature Development Workflow
 
-### 1. Plan Mode Default
-- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
-- If something goes sideways, STOP and re-plan immediately – don’t keep pushing
-- Use plan mode for verification steps, not just building
-- Write detailed specs upfront to reduce ambiguity
+### Before Writing Code
 
-### 2. Subagent Strategy
-- Use subagents liberally to keep main context window clean
-- Offload research, exploration, and parallel analysis to subagents
-- For complex problems, throw more compute at it via subagents
-- One task per subagent for focused execution
+1. **Clarify requirements** — Restate the goal. Ask questions if ambiguous.
+2. **Identify failure modes** — Identify what can go wrong:
+   - Invalid inputs
+   - Missing dependencies
+   - Network/IO failures
+   - Concurrency issues
+   - Memory Leaks / Resource exhaustion
+3. **Classify work by priority**:
+   - **A. Core flow**: Happy path + direct error cases
+   - **B. Edge cases**: Unusual but valid scenarios
+   - **C. Out of scope**: Document, don't implement
+4. **Check existing code** — Is this already solved? Can you extend rather than create?
 
-### 3. Self-Improvement Loop
-- After ANY correction from the user: update `tasks/lessons.md` (or create it first if doesn't exist) with the pattern
-- Write rules for yourself that prevent the same mistake
-- Ruthlessly iterate on these lessons until mistake rate drops
-- Review lessons at session start for relevant project
+### Implementation Order
 
-### 4. Verification Before Done
-- Never mark a task complete without proving it works
-- Diff behavior between main and your changes when relevant
-- Ask yourself: "Would a staff engineer approve this?"
-- Run tests, check logs, demonstrate correctness
+1. Write failing test for core happy path
+2. Implement minimum code to pass
+3. Write failing tests for core error cases
+4. Implement error handling
+5. Refactor if needed (tests stay green)
+6. Add edge case tests only after core is solid
 
-### 5. Demand Elegance (Balanced)
-- For non-trivial changes: pause and ask "is there a more elegant way?"
-- If a fix feels hacky: "Knowing everything I know now, implement the elegant solution"
-- Skip this for simple, obvious fixes – don’t over-engineer
-- Challenge your own work before presenting it
+### Before Submitting
 
-### 6. Autonomous Bug Fixing
-- When given a bug report: just fix it. Don’t ask for hand-holding
-- Point at logs, errors, failing tests – then resolve them
-- Zero context switching required from the user
-- Go fix failing CI tests without being told how
+- [ ] All tests pass
+- [ ] No commented-out code
+- [ ] No TODO without context (`// TODO: [reason] description`)
+- [ ] Error messages are actionable
+- [ ] No secrets, credentials, or hardcoded environment-specific values
+- [ ] Formatting/linting passes
 
 ---
 
-# Task Execution Protocol
+## Debugging Process
 
-This section operationalizes Workflow Orchestration into file-based task tracking.
+### When Something Fails
 
-1. **Plan First**  
-   Write plan to `tasks/todo.md` with checkable items.
+1. **Reproduce reliably** — Can you trigger it consistently?
+2. **Isolate the scope** — What's the smallest input that fails?
+3. **Read the error** — Actually read it. Full stack trace.
+4. **Form a hypothesis** — One specific guess about the cause
+5. **Test the hypothesis** — Add logging, write a test, or inspect state
+6. **Fix and verify** — Change one thing. Confirm it's fixed.
+7. **Add regression test** — Ensure it can't silently break again
 
-2. **Verify Plan**  
-   Check in before starting implementation.
+### Don't
 
-3. **Track Progress**  
-   Mark items complete as you go.
-
-4. **Explain Changes**  
-   Provide a high-level summary at each step.
-
-5. **Document Results**  
-   Add a review section to `tasks/todo.md`.
-
-6. **Capture Lessons**  
-   Update `tasks/lessons.md` after corrections (reinforces the Self-Improvement Loop above).
+- Change multiple things at once
+- Assume you know the cause without evidence
+- Delete error handling to "simplify"
+- Fix symptoms instead of root causes
 
 ---
 
-# Agent Skill Usage
+## Engineering Standards
 
-Skills are globally stored in `~/.agents/skills`. Always check if the Skills are present in the repository `.agents/skills` folder.
-When operating prefer the following skills where applicable:
+### Autonomous Ownership
 
-- Use the `app-store-changelog` skill when generating App Store release notes from git history or tags.
-- Use the `core-data-expert` skill for advanced CoreData guidance and review.
-- Use the `ios-review-and-quality-improvements` skill for iOS review and quality improvements.
-- Use the `swift-concurrency` skill for async/await, actors, data races, Swift 6 concurrency warnings, or concurrency refactors.
-- Use the `swiftui-liquid-glass` skill when adopting or reviewing iOS 26+ Liquid Glass APIs in SwiftUI.
-- Use the `swiftui-animation` skill for SwiftUI animation design and implementation.
-- Use the `swiftui-expert-skill` skill for advanced SwiftUI guidance and reviews.
-- Use the `swift-testing-expert` skill for writing and refactoring unit tests.
+When given a bug or task:
 
----
+- Own it fully.
+- Do not stop at diagnosis.
+- Resolve logs, errors, and failing tests without hand-holding.
+- Minimize context switching for the user.
+- Escalate only with findings and concrete hypotheses.
 
-# Coding Standards
-
-## Commit & Pull Request Guidelines
-
-- Commit messages are short, imperative, and scoped to the change (e.g., "Fix compile error on iOS").
-- PRs should include a clear summary, testing notes, and screenshots for UI-facing changes.
-- Link relevant issues or feature requests when applicable.
+Drive problems to resolution.
 
 ---
 
-## General Rules
+### Demand Elegance
 
-- Don't modify files if they are not requested or not related to the request.
-- Always ask before modifying anything that is not directly related to the request.
-- Platform: iOS / tvOS; UIKit with some SwiftUI; Swift + Objective-C interop.
-- Prefer Swift/SwiftUI for all new work; UIKit is acceptable where SwiftUI is not in use.
-- Do not add new Objective-C files unless required for bridging, legacy integration, or platform constraints.
-- Objective-C legacy code: bug fixes only unless a Swift change requires parity.
-- Follow existing conventions and avoid new dependencies without justification.
-- Document public APIs, cross-module types, and non-obvious logic with English doc comments.
-- Match the surrounding file style; the codebase mixes Swift and Objective-C.
+For non-trivial changes:
 
----
+- Ask: is there a simpler, cleaner approach?
+- Prefer structural fixes over layered patches.
+- Avoid over-engineering trivial work.
+- Optimize for long-term clarity.
 
-## Naming Conventions
-
-- Use UpperCamelCase for types.
-- Use lowerCamelCase for methods and properties.
-- Keep file names aligned with class/struct names.
+Elegance is proportional to complexity.
 
 ---
 
-## Swift Formatting Conventions
+### Continuous Improvement
 
-- Prefer Swift trailing-closure syntax for `firstIndex` lookups.
+After completing work or receiving corrections:
 
-Preferred:
-```swift
-queue.channels.firstIndex { $0.primaryKey == channel.primaryKey }
-```
+1. **Extract the lesson.**
+2. **Update `tasks/lessons.md`.**
+3. **Convert mistakes into explicit rules.**
+4. **Prevent recurrence through tests or standards.**
+5. **Review relevant lessons at session start.**
 
-Not preferred:
-```swift
-queue.channels.firstIndex(where: { $0.primaryKey == channel.primaryKey })
-```
-
----
-
-- Prefer multiline `guard` formatting for wrapped conditions and function calls, with `guard` and `else` on dedicated lines.
-
-Preferred:
-```swift
-guard
-    var playQueue = try queue(
-        for: playlistHashId
-    )
-else {
-    return false
-}
-```
-
-Not preferred:
-```swift
-guard var playQueue = try queue(for: playlistHashId) else {
-    return false
-}
-```
+Mistakes are acceptable.  
+Repeated mistakes are not.
 
 ---
 
-- Prefer multiline function declaration and call formatting when parameters are present.
+## Code Organization
 
-Preferred declaration:
-```swift
-func testFunction(
-    a: Int,
-    b: Int
-) {
-    //Implementation
-}
+### File Structure
+
+- One type per file
+- Filename matches type name exactly
+- Group by feature/domain, not by layer
+- Shared utilities in `Core/` or `Common/` — zero domain dependencies
+
+### Dependency Direction
+
+```
+Features → Services → Core
+    ↓          ↓        ↓
+   UI      Business   Utilities
+           Logic
 ```
 
-Not preferred declaration:
-```swift
-func testFunction(a: Int, b: Int) {
-    //Implementation
-}
-```
-
-Preferred call:
-```swift
-testFunction(
-    a: 0,
-    b: 1
-)
-```
-
-Not preferred call:
-```swift
-testFunction(a: 0, b: 1)
-```
+- `Core/` depends on nothing internal
+- `Services/` depends only on `Core/`
+- `Features/` depends on `Services/` and `Core/`
+- No circular dependencies
+- Features are deletable without breaking unrelated code
 
 ---
 
-### Multiline Formatting Rule
+## Code Style
 
-Use multiline formatting when:
+### Naming
 
-- Parameters exceed one per line
-- The declaration or call wraps due to length
-- Readability benefits from vertical alignment
-
-Avoid forcing multiline formatting for trivial single-parameter declarations or short calls that fit comfortably on one line.
-
-The goal is consistency and readability, not mechanical formatting. Multiline style should improve clarity, reduce diff noise, and make parameter intent visually obvious.
-
-#### Preferred (single short parameter, no wrapping)
-```swift
-func load(id: String)
-```
-
-#### Not Preferred (forced multiline for trivial case)
-```swift
-func load(
-    id: String
-)
-```
-
-#### Preferred (multiple parameters, improved alignment)
-```swift
-func configure(
-    with playlist: Playlist,
-    user: User,
-    isPreview: Bool
-) {
-    // Implementation
-}
-```
-
-#### Not Preferred (long horizontal line reducing readability)
-```swift
-func configure(with playlist: Playlist, user: User, isPreview: Bool) {
-    // Implementation
-}
-```
-
-#### Preferred call (wrapped for clarity)
-```swift
-configure(
-    with: playlist,
-    user: currentUser,
-    isPreview: true
-)
-```
-
-#### Not Preferred call (wrapped but not vertically aligned)
-```swift
-configure(with: playlist,
-          user: currentUser,
-          isPreview: true)
-```
+| Type | Convention |
+|------|------------|
+| Types/Classes | `UpperCamelCase` |
+| Functions/Variables | `lowerCamelCase` |
+| Constants | `lowerCamelCase` or `SCREAMING_SNAKE_CASE` (follow language convention) |
+| Protocols/Interfaces | `UpperCamelCase`, noun or adjective |
 
 ---
 
@@ -306,73 +203,371 @@ guard !string.isEmpty else {
 }
 ```
 
----
+- Prefer multiline `guard` formatting for wrapped conditions and function calls, with `guard` and `else` on dedicated lines.
 
-## Concurrency Rules
-
-- Be explicit about threading and concurrency (actors, `async/await`).
-- Prefer structured concurrency.
-- Avoid hidden thread hops.
-- Do not mix runtime device checks with compile-time target macros.
-- When reviewing SwiftUI code, refer to `~/.agents/SWIFTUI_GUIDE.md` and use `swiftui-expert-skill`.
-
----
-
-## Realm Rules
-
-- Realm `Object`s are thread-confined; never pass live objects across threads.
-- For cross-thread access: pass primary keys + re-fetch, or use `freeze()` for read-only.
-- All mutations of persisted objects must happen inside `try realm.write { }`.
-- Temporary/in-memory objects must not be wrapped in `ThreadSafeReference`.
-
----
-
-## Cross-Platform Target Macros
-
-The app supports both iOS and tvOS. Some code should compile for only one target. Use the correct compile-time macros whenever you add or modify platform-specific code.
-
-Swift:
-```
-#if TARGET_IOS
-// iOS-only code
-#else
-// tvOS-only code
-#endif
+Preferred:
+```swift
+guard
+    var playQueue = try queue(
+        for: playlistHashId
+    )
+else {
+    return false
+}
 ```
 
+Not preferred:
+```swift
+guard var playQueue = try queue(for: playlistHashId) else {
+    return false
+}
 ```
-#if TARGET_TVOS
-// tvOS-only code
-#else
-// iOS-only code
-#endif
-```
-
-Objective-C:
-```
-#ifdef TARGET_IOS
-// iOS-only code
-#else
-// tvOS-only code
-#endif
-```
-
-```
-#ifdef TARGET_TVOS
-// tvOS-only code
-#else
-// iOS-only code
-#endif
-```
-
-Note: If the change applies to only one target, omit `#else` and keep just the single platform block.
 
 ---
 
-# Top 5 Structural Improvements Suggested
+### Functions
 
-1. Clarify the relationship between Workflow Orchestration and Task Execution Protocol to reduce perceived duplication.
-2. Explicitly reinforce that "Capture Lessons" operationalizes the Self-Improvement Loop rather than introducing a separate concept.
-3. Group Coding Standards into logical subsections (General, Naming, Formatting, Concurrency, Persistence, Platform).
-4. Clarify when multiline formatting is required versus optional to avoid pathological formatting in trivial cases.
-5. Separate behavioral rules from formatting rules to keep Coding Standards focused strictly on code-level consistency.
+- Do one thing
+- Name describes what, not how
+- Max 3-4 parameters — beyond that, use a config object
+- Avoid boolean parameters — they obscure intent at call sites
+- Prefer multiline function declaration and call formatting when parameters are present.
+
+Preferred declaration:
+```swift
+func testFunction(
+    a: Int,
+    b: Int
+) {
+    //Implementation
+}
+```
+
+Not preferred declaration:
+```swift
+func testFunction(a: Int, b: Int) {
+    //Implementation
+}
+```
+
+Preferred call:
+```swift
+testFunction(
+    a: 0,
+    b: 1
+)
+```
+
+Not preferred call:
+```swift
+testFunction(a: 0, b: 1)
+
+```
+
+#### Trailing closure syntax
+
+- Prefer Swift trailing-closure syntax lookups.
+
+Preferred:
+```swift
+queue.channels.firstIndex { $0.primaryKey == channel.primaryKey }
+```
+
+Not preferred:
+```swift
+queue.channels.firstIndex(where: { $0.primaryKey == channel.primaryKey })
+```
+
+#### Multiline Formatting Rule
+
+Use multiline formatting when:
+
+- Parameters exceed one per line
+- The declaration or call wraps due to length
+- Readability benefits from vertical alignment
+
+Avoid forcing multiline formatting for trivial single-parameter declarations or short calls that fit comfortably on one line.
+
+The goal is consistency and readability, not mechanical formatting. Multiline style should improve clarity, reduce diff noise, and make parameter intent visually obvious.
+
+##### Preferred (single short parameter, no wrapping)
+```swift
+func load(id: String)
+```
+
+##### Not Preferred (forced multiline for trivial case)
+```swift
+func load(
+    id: String
+)
+```
+
+##### Preferred (multiple parameters, improved alignment)
+```swift
+func configure(
+    with playlist: Playlist,
+    user: User,
+    isPreview: Bool
+) {
+    // Implementation
+}
+```
+
+##### Not Preferred (long horizontal line reducing readability)
+```swift
+func configure(with playlist: Playlist, user: User, isPreview: Bool) {
+    // Implementation
+}
+```
+
+##### Preferred call (wrapped for clarity)
+```swift
+configure(
+    with: playlist,
+    user: currentUser,
+    isPreview: true
+)
+```
+
+##### Not Preferred call (wrapped but not vertically aligned)
+```swift
+configure(with: playlist,
+          user: currentUser,
+          isPreview: true)
+```
+
+---
+
+### Comments
+
+- Explain WHY, not WHAT
+- Delete comments that restate code
+- TODO format: `// TODO: [context] description`
+- Document non-obvious behavior and workarounds
+
+---
+
+## Error Handling
+
+### Rules
+
+1. Define domain-specific error types per module
+2. Include context: what failed, with what inputs
+3. Map external errors at boundaries — don't leak implementation details
+4. Fail at the source — don't pass invalid state hoping someone handles it
+5. Errors are API — design them like success paths
+
+### Error Checklist
+
+- [ ] Message helps diagnose the problem
+- [ ] Includes relevant context (IDs, paths, values)
+- [ ] Caller can distinguish error types programmatically
+- [ ] Transient vs permanent failures are distinguishable
+
+---
+
+## Testing
+
+### Principles
+
+- Tests are isolated: no shared state, no execution order dependencies
+- One behavior per test, descriptive names: `test_build_failsWhenSchemeNotFound`
+- Tests run in parallel — design for it
+- Test behavior, not implementation
+- Fast tests get run; slow tests get skipped
+
+### Before Writing a Test
+
+1. Check if the **behavior** is already tested (not just the code path — multiple tests can hit the same lines testing different behaviors)
+2. Identify the mock in `Tests/Mocks/` — create only if missing
+3. Identify the fixture in `Tests/Fixtures/` — create only if missing
+
+### When Adding Features
+
+1. **Document failure modes first** — List edge cases and failure scenarios in a comment block before writing implementation code:
+   ```
+   // Failure modes:
+   // - Scheme not found in project
+   // - Build timeout exceeded  
+   // - Simulator unavailable
+   // - Concurrent build in progress
+   ```
+2. Write tests in this order:
+   - Happy path for core flow
+   - Error/failure cases for core flow
+   - Edge cases (only after core flow is solid)
+3. Don't skip ahead — core flow must be solid before edge cases
+
+### Test Naming
+
+```
+test_{unit}_{condition}_{expectedResult}
+```
+
+Examples:
+- `test_build_failsWhenSchemeNotFound`
+- `test_parse_returnsNilForMalformedJSON`
+- `test_cache_fetchesNewDataAfterExpiration`
+
+### Structure: Arrange-Act-Assert
+
+```
+func test_example() {
+    // Arrange — setup preconditions
+    
+    // Act — execute behavior under test
+    
+    // Assert — verify outcomes
+}
+```
+
+One blank line between sections. No other structure.
+
+### What to Test
+
+| Test | Don't Test |
+|------|------------|
+| Public interface behavior | Private implementation details |
+| Error handling paths | Framework/language behavior |
+| State transitions | Trivial getters/setters |
+| Business logic | Third-party library internals |
+
+### Unit vs Integration
+
+- **Unit**: Single component, mocked dependencies, fast
+- **Integration**: Multiple components, real dependencies, slower
+
+Default to unit tests. Use integration tests for:
+- Critical paths that must work end-to-end
+- Complex component interactions
+- External service contract validation
+
+---
+
+## Mocks
+
+**Location:** `Tests/Mocks/`  
+**Naming:** `Mock{ProtocolName}` (e.g., `MockBuildService`)
+
+### Rules
+
+1. One mock per protocol/interface
+2. Mocks must be stateless or resettable between tests
+3. Track all inputs received (for verification)
+4. Allow stubbing return values (for control)
+5. Provide `reset()` method to clear state
+
+### Structure
+
+```
+MockBuildService
+├── stubbedResult           // Control what it returns
+├── receivedConfigurations  // Verify what it received
+├── callCount               // Verify how many times called
+└── reset()                 // Clear state between tests
+```
+
+### Don't
+
+- Create test-specific mocks — reuse shared mocks
+- Let mocks accumulate state across tests
+- Mock what you don't own (wrap it first, mock the wrapper)
+
+---
+
+## Fixtures
+
+**Location:** `Tests/Fixtures/`
+
+- Static, deterministic test data
+- Named descriptively: `validUser`, `expiredToken`, `malformedResponse`
+- Minimal — only fields relevant to tests
+- JSON/data files in `Fixtures/` folder
+- Code-based fixtures in `{Type}+Fixtures` extension files
+
+---
+
+## Refactoring
+
+### When to Refactor
+
+- Before adding a feature (make the change easy, then make the easy change)
+- After tests pass (not during implementation)
+- When you touch code that's hard to understand
+
+### When NOT to Refactor
+
+- While debugging
+- Without test coverage
+- Unrelated to the current task
+- "While I'm here" changes — make a separate commit or ticket
+
+### How to Refactor
+
+1. Ensure tests exist and pass
+2. Make one structural change
+3. Run tests
+4. Repeat
+
+Never change behavior and structure in the same step.
+
+---
+
+## Dependencies
+
+### Before Adding
+
+1. Can we solve this in <100 lines ourselves?
+2. Is it actively maintained?
+3. What's the transitive dependency cost?
+4. What's the license?
+5. What if it disappears tomorrow?
+
+### Rules
+
+- Wrap third-party APIs behind interfaces you control
+- Pin versions explicitly
+- Isolate imports to wrapper modules
+- Update deliberately, not automatically
+
+---
+
+## Git Hygiene
+
+### Commits
+
+- One logical change per commit
+- Present tense, imperative: "Add caching" not "Added caching"
+- First line ≤50 chars, blank line, then details
+- Follow GIT templates if present in the repository
+
+### Branches
+
+- `main` is always deployable
+- Feature: `feature/{description}`
+- Fix: `fix/{description}`
+- Hotfix: `hotfix/{hotfix version}`
+- Delete after merge
+
+---
+
+## Token Efficiency
+- Never re-read files you just wrote or edited. You know the contents.
+- Never re-run commands to "verify" unless the outcome was uncertain.
+- Don't echo back large blocks of code or file contents unless asked.
+- Batch related edits into single operations. Don't make 5 edits when 1 handles it.
+- Skip confirmations like "I'll continue..."  Just do it.
+- If a task needs 1 tool call, don't use 3. Plan before acting.
+- Do not summarize what you just did unless the result is ambiguous or you need additional input.
+
+---
+
+## When Uncertain
+
+1. **Check existing patterns** — How does the codebase solve similar problems?
+2. **Ask** — Ambiguity is expensive. Clarify before implementing.
+3. **Smallest change** — Prefer minimal diff that solves the problem.
+4. **Reversibility** — Prefer changes easy to undo.
+5. **Prove it** — Run the code. Pass the tests. Don't guess.
+
+
