@@ -1,3 +1,17 @@
+# Core Engineering Principles
+
+1.  **Clarity over cleverness** — Write code that’s maintainable, not impressive.
+2.  **Explicit over implicit** — No magic. Make behavior obvious.
+3.  **Simplicity first** — Prefer the simplest solution that works.
+4.  **Minimal impact** — Change only what is necessary. Avoid ripple effects and introducing bugs..
+5.  **Composition over inheritance** — Build small units that combine well.
+6.  **Fail fast, fail loud** — Surface errors at the source. Never hide failures.
+7.  **Verify, don’t assume** — Run it. Test it. Prove it works.
+8.  **Delete code** — Less code means fewer bugs. Question every addition.
+9.  **Fix root causes** — No temporary fixes. No laziness. Senior standards only.
+
+---
+
 # Workflow Orchestration
 
 ### 1. Plan Mode Default
@@ -59,22 +73,6 @@ This section operationalizes Workflow Orchestration into file-based task trackin
 
 6. **Capture Lessons**  
    Update `tasks/lessons.md` after corrections (reinforces the Self-Improvement Loop above).
-
----
-
-# Core Engineering Principles
-
-- **Simplicity First**  
-  Make every change as simple as possible. Impact minimal code.
-
-- **Minimal Impact**  
-  Changes should only touch what is necessary. Avoid introducing bugs.
-
-- **No Laziness**  
-  Find root causes. No temporary fixes. Senior developer standards.
-
-- **Clarity Over Cleverness**  
-  Prefer readability and explicitness over abstraction or trickiness.
 
 ---
 
