@@ -81,8 +81,19 @@ When given a bug or task:
 - Resolve logs, errors, and failing tests without hand-holding.
 - Minimize context switching for the user.
 - Escalate only with findings and concrete hypotheses.
+- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions).
+- Use plan mode for verification steps, not just building.
 
 Drive problems to resolution.
+
+---
+
+### Subagent Strategy
+
+- Use subagents liberally to keep main context window clean
+- Offload research, exploration, and parallel analysis to subagents
+- For complex problems, throw more compute at it via subagents
+- One task per subagent for focused execution
 
 ---
 
@@ -569,5 +580,3 @@ Never change behavior and structure in the same step.
 3. **Smallest change** — Prefer minimal diff that solves the problem.
 4. **Reversibility** — Prefer changes easy to undo.
 5. **Prove it** — Run the code. Pass the tests. Don't guess.
-
-
