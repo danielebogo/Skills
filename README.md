@@ -20,6 +20,10 @@ My personal collections of Skills
   ```bash
   npx skills add https://github.com/dimillian/skills --skill swiftui-liquid-glass
   ```
+  - swiftui-performance-audit
+  ```bash
+  npx skills add https://github.com/dimillian/skills --skill swiftui-performance-audit
+  ```
 
 ### AvdLee
 - [swiftui-expert-skill](https://github.com/AvdLee/SwiftUI-Agent-Skill)
