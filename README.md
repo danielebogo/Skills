@@ -42,3 +42,9 @@ npx skills add https://github.com/avdlee/swift-testing-agent-skill --skill swift
 ### Jamesrochabrun
 - [swiftui-animation](https://github.com/jamesrochabrun/skills/tree/main/skills/swiftui-animation)
 - [leetcode-teacher](https://github.com/jamesrochabrun/skills/tree/main/skills/leetcode-teacher)
+
+### Erikote04
+- [swift-api-design-guidelines-skill](https://github.com/Erikote04/Swift-API-Design-Guidelines-Agent-Skill)
+```bash
+npx skills add https://github.com/Erikote04/Swift-API-Design-Guidelines-Agent-Skill --skill swift-api-design-guidelines-skill
+```
