@@ -52,3 +52,13 @@ npx skills add https://github.com/avdlee/swift-testing-agent-skill --skill swift
 ```bash
 npx skills add https://github.com/Erikote04/Swift-API-Design-Guidelines-Agent-Skill --skill swift-api-design-guidelines-skill
 ```
+
+### XCDocs
+- [XCDocs](https://github.com/BitrigApp/XCDocs)
+```bash
+brew install BitrigApp/tap/xcdocs
+```
+- Clone the repo and symlink the `[PATH_TO_THE_REPO]/.agents/skills/xcdocs to ~/.agents/skills/xcdocs` 
+```bash
+ln -sfn [PATH_TO_THE_REPO]/.agents/skills/xcdocs ~/.agents/skills/xcdocs
+```
