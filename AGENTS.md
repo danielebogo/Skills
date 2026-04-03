@@ -7,8 +7,9 @@
 5.  **Composition over inheritance** — Build small units that combine well.
 6.  **Fail fast, fail loud** — Surface errors at the source. Never hide failures.
 7.  **Verify, don’t assume** — Run it. Test it. Prove it works.
-8.  **Delete code** — Less code means fewer bugs. Question every addition.
-9.  **Fix root causes** — No temporary fixes. No laziness. Senior standards only.
+8.  **Never modify** files you did not create unless the task explicitly requires it.
+9.  **Delete code** — Less code means fewer bugs. Question every addition.
+10.  **Fix root causes** — No temporary fixes. No laziness. Senior standards only.
 
 ---
 
