@@ -43,6 +43,12 @@ npx skills add https://github.com/avdlee/core-data-agent-skill --skill core-data
 npx skills add https://github.com/avdlee/swift-testing-agent-skill --skill swift-testing-expert
 ```
 
+### TwoStraws
+- [swift-testing-agent-skill](https://github.com/twostraws/Swift-Testing-Agent-Skill)
+```bash
+npx skills add https://github.com/twostraws/swift-testing-agent-skill --skill swift-testing-pro
+```
+
 ### Jamesrochabrun
 - [swiftui-animation](https://github.com/jamesrochabrun/skills/tree/main/skills/swiftui-animation)
 - [leetcode-teacher](https://github.com/jamesrochabrun/skills/tree/main/skills/leetcode-teacher)
