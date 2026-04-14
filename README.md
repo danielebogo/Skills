@@ -69,12 +69,8 @@ brew install BitrigApp/tap/xcdocs
 ln -sfn [PATH_TO_THE_REPO]/.agents/skills/xcdocs ~/.agents/skills/xcdocs
 ```
 
-### SQLiteData
-- [Axiom - SQLiteData](https://github.com/charleswiltgen/axiom)
+### Data
+- [Axiom - Data](https://github.com/charleswiltgen/axiom)
 ```bash
-npx skills add https://github.com/charleswiltgen/axiom --skill axiom-sqlitedata
-```
-- [Axiom - SQLiteData Expert](https://github.com/charleswiltgen/axiom)
-```bash
-npx skills add https://github.com/charleswiltgen/axiom --skill axiom-sqlitedata-ref
+npx skills add https://github.com/charleswiltgen/axiom --skill axiom-data
 ```
