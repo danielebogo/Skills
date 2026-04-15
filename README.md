@@ -74,3 +74,9 @@ ln -sfn [PATH_TO_THE_REPO]/.agents/skills/xcdocs ~/.agents/skills/xcdocs
 ```bash
 npx skills add https://github.com/charleswiltgen/axiom --skill axiom-data
 ```
+
+### TvOS
+- [Mhaviv - Focus](https://github.com/mhaviv/Swift-FocusEngine-Agent-Skill)
+```bash
+npx skills add https://github.com/mhaviv/Swift-FocusEngine-Agent-Skill --skill swift-focusengine-pro --agent codex
+```
