@@ -10,6 +10,17 @@ My personal collections of Skills
 
 ## Third Party
 
+### Steipete
+- [Skills](https://github.com/steipete/agent-scripts/skills)
+  - codex-review
+  ```bash
+  npx skills add https://github.com/steipete/agent-scripts --skill codex-review
+  ```
+  - codex-debugging
+  ```bash
+  npx skills add https://github.com/steipete/agent-scripts --skill codex-debugging
+  ```
+
 ### Dimillian
 - [Skills](https://github.com/dimillian/skills)
   - app-store-changelog
