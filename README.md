@@ -10,6 +10,15 @@ My personal collections of Skills
 
 ## Third Party
 
+### ASC
+- [ASC](https://asccli.sh/)
+```bash
+brew install asc
+```
+```bash
+asc install-skills
+```
+
 ### Steipete
 - [Skills](https://github.com/steipete/agent-scripts/skills)
   - codex-review
