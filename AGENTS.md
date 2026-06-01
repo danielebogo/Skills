@@ -44,6 +44,7 @@
 - [ ] All tests pass
 - [ ] No commented-out code
 - [ ] No TODO without context (`// TODO: [reason] description`)
+- [ ] New Swift types, properties, and functions include Xcode documentation comments
 - [ ] Error messages are actionable
 - [ ] No secrets, credentials, or hardcoded environment-specific values
 - [ ] Formatting/linting passes
@@ -162,6 +163,39 @@ Features → Services → Core
 | Functions/Variables | `lowerCamelCase` |
 | Constants | `lowerCamelCase` or `SCREAMING_SNAKE_CASE` (follow language convention) |
 | Protocols/Interfaces | `UpperCamelCase`, noun or adjective |
+
+---
+
+### Documentation
+
+Documentation is mandatory for every new Swift symbol that defines API or behavior:
+
+- Types: `class`, `struct`, `enum`, `actor`, `protocol`, `extension` declarations that add public behavior, and type aliases.
+- Properties: stored properties, computed properties, static properties, constants, bindings, and dependency references.
+- Functions: instance functions, static functions, initializers, subscripts, protocol requirements, closures stored as properties, and factory helpers.
+
+Use Xcode documentation comment format with triple-slash comments:
+
+```swift
+/// Coordinates playlist loading and queue updates for the player.
+struct PlaylistCoordinator {
+    /// The service used to resolve playlist metadata before playback starts.
+    private let playlistService: PlaylistService
+
+    /// Builds a play queue for the requested playlist.
+    ///
+    /// - Parameter playlistId: The stable identifier of the playlist to load.
+    /// - Returns: A queue ordered according to the playlist metadata.
+    /// - Throws: `PlaylistCoordinatorError.playlistNotFound` when no playlist exists for `playlistId`.
+    func queue(
+        for playlistId: String
+    ) throws -> PlayQueue {
+        // Implementation
+    }
+}
+```
+
+Documentation must explain intent, ownership, side effects, failure behavior, and non-obvious constraints. Do not write placeholder documentation that only repeats the symbol name. Keep docs concise, but make them useful in Xcode Quick Help.
 
 ---
 
