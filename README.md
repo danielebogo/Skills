@@ -19,6 +19,18 @@ brew install asc
 asc install-skills
 ```
 
+### Point-Free
+- [Point-Free Way](https://github.com/pointfreeco/pfw)
+```bash
+brew install pointfreeco/tap/pfw
+```
+```bash
+pfw login
+```
+```bash
+pfw install --tool agents
+```
+
 ### Steipete
 - [Skills](https://github.com/steipete/agent-scripts/skills)
   - codex-review
