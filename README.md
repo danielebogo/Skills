@@ -31,6 +31,12 @@ pfw login
 pfw install --tool agents
 ```
 
+### Egonex-AI
+- [Understand Anything](https://github.com/Egonex-AI/Understand-Anything)
+```bash
+curl -fsSL https://raw.githubusercontent.com/Egonex-AI/Understand-Anything/main/install.sh | bash -s codex
+```
+
 ### Steipete
 - [Skills](https://github.com/steipete/agent-scripts/skills)
   - codex-review
