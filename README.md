@@ -37,6 +37,12 @@ pfw install --tool agents
 curl -fsSL https://raw.githubusercontent.com/Egonex-AI/Understand-Anything/main/install.sh | bash -s codex
 ```
 
+### Emil Kowalski
+- [Skills for Designers and Engineers](https://github.com/emilkowalski/skills)
+```bash
+npx skills@latest add emilkowalski/skills
+```
+
 ### Steipete
 - [Skills](https://github.com/steipete/agent-scripts/skills)
   - codex-review
