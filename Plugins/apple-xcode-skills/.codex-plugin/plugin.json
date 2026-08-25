@@ -1,0 +1,32 @@
+{
+  "name": "apple-xcode-skills",
+  "version": "0.1.0",
+  "description": "Apple platform development skills exported from Xcode for Swift, SwiftUI, UIKit, App Intents, testing, security, and device interaction.",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "keywords": [
+    "Apple",
+    "Xcode",
+    "Swift",
+    "SwiftUI",
+    "UIKit",
+    "App Intents",
+    "iOS",
+    "macOS"
+  ],
+  "interface": {
+    "displayName": "Apple Xcode Skills",
+    "shortDescription": "Apple development guidance for Codex.",
+    "longDescription": "A local bundle of Apple development skills exported from Xcode, covering SwiftUI, UIKit, App Intents, document apps, testing, security settings, bounds safety, and device interaction.",
+    "developerName": "Local developer",
+    "category": "Developer Tools",
+    "capabilities": [],
+    "defaultPrompt": [
+      "Review this SwiftUI code using Apple's guidance.",
+      "Help me implement this App Intents feature correctly.",
+      "Audit this Xcode project for security improvements."
+    ]
+  }
+}
