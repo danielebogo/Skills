@@ -598,13 +598,16 @@ Never change behavior and structure in the same step.
 ---
 
 ## Token Efficiency
-- Never re-read files you just wrote or edited. You know the contents.
-- Never re-run commands to "verify" unless the outcome was uncertain.
-- Don't echo back large blocks of code or file contents unless asked.
-- Batch related edits into single operations. Don't make 5 edits when 1 handles it.
-- Skip confirmations like "I'll continue..."  Just do it.
-- If a task needs 1 tool call, don't use 3. Plan before acting.
-- Do not summarize what you just did unless the result is ambiguous or you need additional input.
+
+- Search before reading; read only the relevant ranges. Reuse context already read. Re-read when a file has changed, earlier output was incomplete, or verification requires it.
+- When validation is requested or required by the repository, start with the narrowest relevant check. Broaden it as the results and task risk warrant; run the full suite once at the end when appropriate.
+- For long-running commands, prefer one supported wait or watch operation over repeated sleep-and-check steps.
+- Keep command output compact. Use existing summaries or filters while preserving exit status, warnings, errors, and failing test details. Read full logs when needed to diagnose a failure.
+- For Apple UI tasks, inspect the accessibility hierarchy first; use screenshots to check visual details the hierarchy cannot show.
+- Load the best-fit skill. Add another only when it provides distinct or required guidance; avoid loading the same skill twice.
+- Delegate bounded, independent searches when parallelism or context isolation is useful. Use a lightweight model for exploration when available.
+- Lead with the result and skip routine tool narration. The final report should still state changes and requested validation, including failures or unverified results.
+- After two failed attempts at the same fix, stop repeating it without new evidence. Summarize the findings, update the hypothesis, and choose the next diagnostic step.
 
 ---
 
